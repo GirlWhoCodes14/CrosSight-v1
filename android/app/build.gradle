@@ -57,10 +57,6 @@ android {
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
 project.ext.TEST_ASSETS_DIR = projectDir.toString() + '/src/androidTest/assets'
 
-// Download default models; if you wish to use your own models then
-// place them in the "assets" directory and comment out this line.
-apply from:'download_models.gradle'
-
 dependencies {
     // Kotlin lang
     implementation 'androidx.core:core-ktx:1.6.0'
