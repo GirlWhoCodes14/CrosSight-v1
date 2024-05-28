@@ -1,0 +1,3 @@
+C:/Users/alexi/OneDrive/Documents/crossight_code_AA_ZC/android/openCV/.cxx/Debug/63o27962/x86/CMakeFiles/opencv_jni_shared.dir
+C:/Users/alexi/OneDrive/Documents/crossight_code_AA_ZC/android/openCV/.cxx/Debug/63o27962/x86/CMakeFiles/edit_cache.dir
+C:/Users/alexi/OneDrive/Documents/crossight_code_AA_ZC/android/openCV/.cxx/Debug/63o27962/x86/CMakeFiles/rebuild_cache.dir

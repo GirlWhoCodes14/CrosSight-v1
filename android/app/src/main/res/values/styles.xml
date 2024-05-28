@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Base Application Theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <!-- settings_drawer.xml -->
+    <style name="settings_option">
+        <item name="android:accessibilityLiveRegion">assertive</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/rounded_option</item>
+        <item name="android:checked">true</item>
+        <item name="android:hapticFeedbackEnabled">true</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:thumbTint">@color/switch_thumb</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="option_descriptor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="android:textColor">#5C5959</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>
+

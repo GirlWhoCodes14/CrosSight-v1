@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="#81C784" /> <!-- color when switch is checked -->
+    <item android:state_checked="false" android:color="#E57373" /> <!-- color when switch is unchecked -->
+</selector>

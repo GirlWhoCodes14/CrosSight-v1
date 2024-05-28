@@ -1,0 +1,7 @@
+Executable : C:\Users\Zenroy\AppData\Local\Android\Sdk\cmake\3.18.1\bin\ninja.exe
+arguments : 
+-C
+D:\NDHU Work\_3rdYrProject\CrosSight_MobileApp\lite\crossight-app\object_detection\android\openCV\.cxx\Debug\5i32261e\x86
+opencv_jni_shared
+jvmArgs : 
+

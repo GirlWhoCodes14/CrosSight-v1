@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- appbar.xml -->
+    <string name="app_name" translatable="false">CrosSight</string>
+    <string name="settings_button_description">Settings</string>
+
+    <!-- OverlayView -->
+    <string name="go">Go</string>
+    <string name="stop">Stop</string>
+    <string name="crosswalk">Crosswalk</string>
+
+    <!-- settings_drawer.xml -->
+    <string name="visual_cue">Screen Visuals</string>
+    <string name="visual_description">Show on-screen visuals, such as colors and words, to indicate when and how to cross the street.</string>
+
+    <string name="sound_cue">Sound</string>
+    <string name="sound_description">Play a beep pattern for when to cross (fast beeping) and when to wait (slow beeping).</string>
+
+    <string name="voice_cue">Voice Announcements</string>
+    <string name="voice_announcement_description">Announce how to navigate on the crosswalk.</string>
+
+    <string name="vibration_cue">Vibration</string>
+    <string name="vibration_description">Vibrate when to cross (fast vibration) and when to wait (slow vibration).</string>
+
+    <!-- Navigation -->
+    <string name="alert_right">Caution! Keep Right.</string>
+    <string name="alert_left">Caution! Keep Left.</string>
+    <string name="alert_straight">Stay Straight.</string>
+    <string name="no_crossing">No Crossing Detected!</string>
+
+    <!-- Language -->
+    <string name="language">Language</string>
+    <string name="language_spinner_description">Set to your preferred language.</string>
+    <string-array name="language_array">
+        <item>English</item>
+        <item>Chinese (Traditional)</item>
+    </string-array>
+</resources>

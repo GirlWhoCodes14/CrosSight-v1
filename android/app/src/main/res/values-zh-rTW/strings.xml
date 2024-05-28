@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CrosSight</string>
+    <string name="settings_button_description">設定</string>
+
+    <string name="go">行</string>
+    <string name="stop">停</string>
+    <string name="crosswalk">人行道</string>
+    <string name="visual_cue">螢幕視覺</string>
+    <string name="visual_description">顯示螢幕上的視覺元素，例如顏色和文字，以指示何時以及如何穿越馬路。</string>
+
+    <string name="sound_cue">聲音</string>
+    <string name="sound_description">播放一種蜂鳴模式，用於指示何時穿越（快速蜂鳴）以及何時等待（慢速蜂鳴）。</string>
+
+    <string name="voice_cue">語音提示</string>
+    <string name="voice_announcement_description">宣佈如何在人行橫道上導航。</string>
+
+    <string name="alert_right">注意！保持右側</string>
+    <string name="alert_left">注意！保持左側</string>
+    <string name="alert_straight">留在這條路上</string>
+    <string name="no_crossing">"未檢測到穿越"</string>
+
+    <string name="vibration_cue">震動</string>
+    <string name="vibration_description">當需要穿越時（快速震動）以及何時等待（慢速震動）時進行振動。</string>
+
+    <string name="language">语言</string>
+    <string name="language_spinner_description">將應用程式設定為您偏好的語言。</string>
+    <string-array name="language_array">
+        <item>英文</item>
+        <item>中文（繁體）</item>
+    </string-array>
+</resources>

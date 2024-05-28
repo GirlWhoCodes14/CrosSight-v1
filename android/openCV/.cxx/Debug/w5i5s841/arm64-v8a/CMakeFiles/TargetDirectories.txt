@@ -1,0 +1,3 @@
+C:/Users/alexi/Downloads/crossight-app/crossight-app/object_detection/android/openCV/.cxx/Debug/w5i5s841/arm64-v8a/CMakeFiles/opencv_jni_shared.dir
+C:/Users/alexi/Downloads/crossight-app/crossight-app/object_detection/android/openCV/.cxx/Debug/w5i5s841/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/alexi/Downloads/crossight-app/crossight-app/object_detection/android/openCV/.cxx/Debug/w5i5s841/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+D:/NDHU Work/_3rdYrProject/CrosSight_MobileApp/lite/crossight-app/object_detection/android/openCV/.cxx/Debug/265t302h/arm64-v8a/CMakeFiles/opencv_jni_shared.dir
+D:/NDHU Work/_3rdYrProject/CrosSight_MobileApp/lite/crossight-app/object_detection/android/openCV/.cxx/Debug/265t302h/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/NDHU Work/_3rdYrProject/CrosSight_MobileApp/lite/crossight-app/object_detection/android/openCV/.cxx/Debug/265t302h/arm64-v8a/CMakeFiles/rebuild_cache.dir

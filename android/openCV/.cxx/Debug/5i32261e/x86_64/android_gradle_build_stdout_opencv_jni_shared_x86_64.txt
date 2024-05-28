@@ -1,0 +1,2 @@
+ninja: Entering directory `D:\NDHU Work\_3rdYrProject\CrosSight_MobileApp\lite\crossight-app\object_detection\android\openCV\.cxx\Debug\5i32261e\x86_64'
+ninja: no work to do.
