@@ -1,0 +1,7 @@
+Executable : C:\Users\alexi\AppData\Local\Android\Sdk\cmake\3.18.1\bin\ninja.exe
+arguments : 
+-C
+C:\Users\alexi\OneDrive\Documents\crossight_code_AA_ZC\android\openCV\.cxx\Debug\63o27962\armeabi-v7a
+opencv_jni_shared
+jvmArgs : 
+

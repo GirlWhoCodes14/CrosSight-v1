@@ -24,15 +24,23 @@ import kotlin.math.max
 class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     private val sharedPreferences: SharedPreferences = context!!.getSharedPreferences("settings", Context.MODE_PRIVATE)
-    private var vibrateStatus: String = ""
-    private var isVibrateCancelled: Boolean = false
     private var results: List<Detection> = LinkedList<Detection>()
     private var boxPaint = Paint()
-    private var textBackgroundPaint = Paint()
-    private var textPaint = Paint()
-    private var guidanceText: String = ""
     private var scaleFactor: Float = 1f
     private var bounds = Rect()
+    private var textBackgroundPaint = Paint()
+    private var textPaint = Paint()
+
+    // Variables: Crosswalk Navigation - Guidance Text
+    private var guidanceText: String = ""
+    private val guidancePaint = Paint().apply {
+        color = Color.WHITE
+        textSize = 60f
+        style = Paint.Style.FILL
+        textAlign = Paint.Align.CENTER
+    }
+
+    // Variables: Sound Cue
     private var mediaPlayer: MediaPlayer? = null
     private val stopHandler = Handler(Looper.getMainLooper())
     private val stopRunnable = Runnable {
@@ -44,12 +52,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         }
     }
 
-    private val guidancePaint = Paint().apply {
-        color = Color.WHITE
-        textSize = 60f
-        style = Paint.Style.FILL
-        textAlign = Paint.Align.CENTER
-    }
+    // Variables: Vibration Cue
+    private var isFastVibrate = false
+    private var isVibrateCancelled: Boolean = false
 
 
     init {
@@ -57,16 +62,18 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         initMediaPlayer()
     }
 
+
     private fun initMediaPlayer() {
         mediaPlayer = MediaPlayer.create(context, R.raw.ticker)
     }
 
+
     private fun initPaints() {
-        textBackgroundPaint.color = Color.WHITE // EDIT: Color.BLACK ~~~~
+        textBackgroundPaint.color = Color.WHITE
         textBackgroundPaint.style = Paint.Style.FILL
         textBackgroundPaint.textSize = 50f
 
-        textPaint.color = Color.BLACK // EDIT: Color.WHITE ~~~~
+        textPaint.color = Color.BLACK
         textPaint.style = Paint.Style.FILL
         textPaint.textSize = 50f
 
@@ -83,12 +90,12 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
-        var countdown = false
-        var go = false
         var crs = false
+        var go = false
         var stop = false
 
-        if (results.isEmpty()) {
+        if (results.isEmpty()) { // No objects detected
+            println("No results")
             isVibrateCancelled = true
             context.vibrator(longArrayOf(0), true)
         }
@@ -104,36 +111,29 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             // Draw bounding box around detected objects
             val drawableRect = RectF(left, top, right, bottom)
             canvas.drawRect(drawableRect, boxPaint)
+
+            // Holds the classes for the detected objects
             val label = result.categories[0].label
 
+            // Checks if there is a crosswalk, go light, or stop light
             if (label.contains("crossing")){ crs = true }
-            go = label.contains("go")
-            countdown = label.contains("count-blank") // ADDED
+            go = (label.contains("go") || label.contains("count-blank"))
             stop = label.contains("stop")
 
-            // EDIT: replaced by Alexis' version ~~~~
+            // Sets the text for the label
             val drawableText: String =
-                if (go || countdown) { context.getString(R.string.go)
+                if (go) { context.getString(R.string.go)
                 } else if (stop) { context.getString(R.string.stop)
                 } else if (crs) { context.getString(R.string.crosswalk)
                 } else { ""
                 }
 
-            // ADDED: sets the color of the label ~~~~
+            // Sets the color of the label
             textPaint.color =
-                if (go || countdown) { Color.GREEN
+                if (go) { Color.GREEN
                 } else if (stop) { Color.RED
                 } else { Color.BLACK
                 }
-
-
-            if (sharedPreferences.getBoolean("visualCue", true)) {
-                if (go || countdown) {
-                    visualSignal(Paint().apply { setARGB(128, 0, 255, 0) },canvas) // Flash the screen green
-                } else if (stop) {
-                    visualSignal(Paint().apply { setARGB(128, 255, 0, 0) },canvas) // Flash the screen red
-                }
-            }
 
             textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
             val textWidth = bounds.width()
@@ -141,18 +141,34 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             canvas.drawRect(
                 left,
                 top,
-                left + textWidth + BOUNDING_RECT_TEXT_PADDING, // EDIT: removed Companion. before BOUNDING... ~~~~
-                top + textHeight + BOUNDING_RECT_TEXT_PADDING, // EDIT: removed Companion. before BOUNDING... ~~~~
+                left + textWidth + BOUNDING_RECT_TEXT_PADDING,
+                top + textHeight + BOUNDING_RECT_TEXT_PADDING,
                 textBackgroundPaint
             )
 
             // Draw text for detected object
             canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
 
+            if (guidanceText.isNotEmpty()) {
+                val x = width / 2f
+                val y = height * 0.9f  // Position the text near the bottom of the view
+                canvas.drawText(guidanceText, x, y, guidancePaint)
+            }
 
-            //Audio Text to Speech
-            if(sharedPreferences.getBoolean("soundCue", true)){
-                if(crs && (go || countdown) && !mediaPlayer!!.isPlaying){
+            // Toggle: Visual Cue (red or green color overlay)
+            if (sharedPreferences.getBoolean("visualCue", true)) {
+                if (go) {
+                    //visualSignal(Color.GREEN, canvas)
+                    visualSignal(Paint().apply { setARGB(128, 0, 255, 0) },canvas) // Flash the screen green
+                } else if (stop) {
+                    //visualSignal(Color.RED, canvas)
+                    visualSignal(Paint().apply { setARGB(128, 255, 0, 0) },canvas) // Flash the screen red
+                }
+            }
+
+            // Toggle: Sound Cue (fast or low beeping Sound)
+            if (sharedPreferences.getBoolean("soundCue", true)) {
+                if(crs && go && !mediaPlayer!!.isPlaying){
                     adjustPlaybackSpeed(false)
                     stopHandler.removeCallbacks(stopRunnable)
                     stopHandler.postDelayed(stopRunnable, 1000)  // Delay is in milliseconds
@@ -160,7 +176,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     if (!mediaPlayer!!.isPlaying) {
                         mediaPlayer?.start()
                     }
-                }else if(crs && stop){
+                } else if(crs && stop){
                     adjustPlaybackSpeed(true) // Half speed
                     stopHandler.removeCallbacks(stopRunnable)
                     stopHandler.postDelayed(stopRunnable, 1000)
@@ -169,13 +185,15 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     }
                 }
             }
+
+            // Toggle: Vibration Cue (fast or low vibration)
             if (sharedPreferences.getBoolean("vibrationCue", true)) {
-                if ((crs && (go || countdown)) && (vibrateStatus != "go" || isVibrateCancelled)) {
-                    vibrateStatus = "go"
+                if ((crs && go) && (!isFastVibrate || isVibrateCancelled)) {
+                    isFastVibrate = true
                     isVibrateCancelled = false
                     context.vibrator(longArrayOf(0, 150, 150, 150, 150))
-                } else if ((crs && stop) && (vibrateStatus != "stop" || isVibrateCancelled)) {
-                    vibrateStatus = "stop"
+                } else if ((crs && stop) && (isFastVibrate || isVibrateCancelled)) {
+                    isFastVibrate = false
                     isVibrateCancelled = false
                     context.vibrator(longArrayOf(0, 1200, 300, 1200, 300))
                 } // conditional statement for vibration
@@ -190,11 +208,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             stopHandler.postDelayed(stopRunnable, 3000) // Stop playing if neither "go" nor "stop" are detected for 8 seconds
         }
 
-        if (guidanceText.isNotEmpty()) {
-            val x = width / 2f
-            val y = height * 0.9f  // Position the text near the bottom of the view
-            canvas.drawText(guidanceText, x, y, guidancePaint)
-        }
     }
 
     private fun visualSignal(myColor: Paint, canvas: Canvas) {
@@ -205,7 +218,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             val clearPaint = Paint().apply { color = Color.TRANSPARENT }
             canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), clearPaint)
             invalidate() // Force a redraw
-        }, 1000) // EDIT: changed from 500
+        }, 3000) // EDIT: changed from 500
 
     }
 
@@ -226,28 +239,11 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         }
     }
 
-
     private fun releaseMediaPlayer() {
         mediaPlayer?.release()
         mediaPlayer = null
     }
 
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        releaseMediaPlayer()  // Ensure you release the MediaPlayer when the view is destroyed
-    }
-
-
-
-    fun setResults(
-        detectionResults: MutableList<Detection>,
-        imageHeight: Int,
-        imageWidth: Int
-    ) {
-        results = detectionResults
-        scaleFactor = max(width.toFloat() / imageWidth, height.toFloat() / imageHeight)
-        invalidate()
-    }
 
     // -------------------- ADDED: To create vibration --------------------------
     @SuppressLint("ServiceCast", "WrongConstant")
@@ -262,23 +258,23 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                 } else { vibrator.vibrate(mVibratePattern, 0) // 0 : repeats constantly
                 }
             } // Build.VERSION_CODES.S
-
-            /*
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && Build.VERSION.SDK_INT < Build.VERSION_CODES.S -> {
-                // For Android 8.0 (Oreo) to Android 11 (R)
-                val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(mVibratePattern, 0)
-            }
-
-            else -> {
-                // For Android versions below Oreo (API level 26)
-                val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(mVibratePattern, 0)
-            }*/
         } // when
     } // fun context.vibrator()
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        releaseMediaPlayer()  // Ensure you release the MediaPlayer when the view is destroyed
+    }
 
+    fun setResults(
+        detectionResults: MutableList<Detection>,
+        imageHeight: Int,
+        imageWidth: Int
+    ) {
+        results = detectionResults
+        scaleFactor = max(width.toFloat() / imageWidth, height.toFloat() / imageHeight)
+        invalidate()
+    }
 
     companion object {
         private const val BOUNDING_RECT_TEXT_PADDING = 8

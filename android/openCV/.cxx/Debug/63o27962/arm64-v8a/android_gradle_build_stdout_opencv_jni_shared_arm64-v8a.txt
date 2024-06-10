@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\alexi\OneDrive\Documents\crossight_code_AA_ZC\android\openCV\.cxx\Debug\63o27962\arm64-v8a'
+ninja: no work to do.
