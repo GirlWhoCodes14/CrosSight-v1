@@ -4,9 +4,8 @@
 CrosSight is an Android mobile application that aids the visually impaired in crossing the street. 
 
 ### Developed by
-Zenroy Chance
-
-Alexis Ayuso
+1. Zenroy Chance
+2. Alexis Ayuso
 
 ### About
 It uses your device's camera to detect the pedestrian signal ahead of you and alerts the user when to wait or when to cross. Then, it naviagtes the user across the pedestrian crossing by telling them to stay straight or go left or go right.
