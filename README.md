@@ -5,6 +5,7 @@ CrosSight is an Android mobile application that aids the visually impaired in cr
 
 ### Developed by
 Zenroy Chance
+
 Alexis Ayuso
 
 ### About
@@ -18,7 +19,9 @@ CrosSight received a 1st Place Award in 112 CSIE Undergraduate Project at Nation
 2. Chinese (Taiwan)
 
 ### Disclaimer
-It is intended for use in Taiwan as crosswalks and pedestrian signals in other countries may vary. The APP is a tool to assist in crossing the street, but it does not replace traditional mobility aids like white canes and guide dogs. Please remain aware and use your discretion when crossing the street with or without CrosSight. 
+It is intended for use in Taiwan as crosswalks and pedestrian signals in other countries may vary. 
+
+The APP is a tool to assist in crossing the street, but it does not replace traditional mobility aids like white canes and guide dogs. Please remain aware and use your discretion when crossing the street with or without CrosSight. 
 
 
 
@@ -28,13 +31,10 @@ CrosSight leverages an object detection model to identify pedestrian signals and
 ### Features
 In the CrosSight settings, users can enable and disable various alert preferences.
 
-•	Screen Visuals:   flashes a green or red translucent color to indicate whether you can cross the street, and it displays phrases to navigate the user on the crosswalk.
-
-•	Sound:   plays a ticking pattern for when to cross (fast ticking) and when to wait (slow ticking).
-
-•	Voice Announcements:   announces how to navigate on the crosswalk.
-
-•	Vibration:   vibrates when to cross (fast vibration) and when to wait (slow vibration).
+1. Screen Visuals:   flashes a green or red translucent color to indicate whether you can cross the street, and it displays phrases to navigate the user on the crosswalk.
+2. Sound:   plays a ticking pattern for when to cross (fast ticking) and when to wait (slow ticking).
+3. Voice Announcements:   announces how to navigate on the crosswalk.
+4. Vibration:   vibrates when to cross (fast vibration) and when to wait (slow vibration).
 
 ### Accessibility
 The UI/UX design allows for sight-free navigation around the application by utilizing TalkBack. TalkBack is an accessibility feature that helps people who are blind or have low vision to interact with Android devices using touch and spoken feedback.
