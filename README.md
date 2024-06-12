@@ -27,18 +27,17 @@ CrosSight leverages an object detection model to identify pedestrian signals and
 
 ### Features
 In the CrosSight settings, users can enable and disable various alert preferences.
-#### Screen Visuals
-flashes a green or red translucent color to indicate whether you can cross the street, and it displays phrases to navigate the user on the crosswalk.
-#### Sound
-plays a ticking pattern for when to cross (fast ticking) and when to wait (slow ticking).
-#### Voice Announcements
-announces how to navigate on the crosswalk.
-#### Vibration
-vibrates when to cross (fast vibration) and when to wait (slow vibration).
+•	Screen Visuals:   flashes a green or red translucent color to indicate whether you can cross the street, and it displays phrases to navigate the user on the crosswalk.
 
+•	Sound:   plays a ticking pattern for when to cross (fast ticking) and when to wait (slow ticking).
+
+•	Voice Announcements:   announces how to navigate on the crosswalk.
+
+•	Vibration:   vibrates when to cross (fast vibration) and when to wait (slow vibration).
 
 ### Accessibility
 The UI/UX design allows for sight-free navigation around the application by utilizing TalkBack. TalkBack is an accessibility feature that helps people who are blind or have low vision to interact with Android devices using touch and spoken feedback.
+
 
 
 ## Object Detection Model
@@ -46,8 +45,12 @@ The model was trained on a dataset of pedestrain signals and crosswalks in China
 
 ### Results
 •	Mean Average Precision (mAP) = 97.7%
+
 •	Precision = 95.6%
+
 •	Recall = 90.5%
+
+
 
 ## Hardware/Software Specifications
 1. Camera Resolution = at least 12 MP
