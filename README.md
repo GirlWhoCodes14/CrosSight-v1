@@ -45,9 +45,9 @@ The UI/UX design allows for sight-free navigation around the application by util
 The model was trained on a dataset of pedestrain signals and crosswalks in China because of its similarity to those in Taiwan. 1904 images were used to train the model. A total of 7 classes were used to annotate the images. The model uses a MobileNetV2 architecture. 
 
 ### Results
-Mean Average Precision (mAP) = 97.7%
-Precision = 95.6%
-Recall = 90.5%
+•	Mean Average Precision (mAP) = 97.7%
+•	Precision = 95.6%
+•	Recall = 90.5%
 
 ## Hardware/Software Specifications
 1. Camera Resolution = at least 12 MP
