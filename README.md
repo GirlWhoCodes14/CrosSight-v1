@@ -27,6 +27,7 @@ CrosSight leverages an object detection model to identify pedestrian signals and
 
 ### Features
 In the CrosSight settings, users can enable and disable various alert preferences.
+
 •	Screen Visuals:   flashes a green or red translucent color to indicate whether you can cross the street, and it displays phrases to navigate the user on the crosswalk.
 
 •	Sound:   plays a ticking pattern for when to cross (fast ticking) and when to wait (slow ticking).
